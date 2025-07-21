@@ -1,0 +1,130 @@
+import React from "react";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+// Import all working pages
+import Index from "./pages/Index";
+import WorkingHomepage from "./pages/WorkingHomepage";
+import Dashboard from "./pages/Dashboard";
+import Pricing from "./pages/Pricing";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Console from "./pages/Console";
+import CreateAgent from "./pages/CreateAgent";
+import AITraining from "./pages/AITraining";
+import PartnerTech from "./pages/PartnerTech";
+import Settings from "./pages/Settings";
+import Upgrade from "./pages/Upgrade";
+import ChromeInstall from "./pages/ChromeInstall";
+import CRM from "./pages/CRM";
+import AdminClients from "./pages/AdminClients";
+import AdminLogs from "./pages/AdminLogs";
+import ClientOnboarding from "./pages/ClientOnboarding";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
+import Setup from "./pages/Setup";
+import ReferralInvite from "./pages/ReferralInvite";
+import Workspace from "./pages/Workspace";
+import StickyNotes from "./pages/workspace/StickyNotes";
+import ImageGenerator from "./pages/workspace/ImageGenerator";
+import Help from "./pages/Help";
+import ResearchRedirect from "./pages/ResearchRedirect";
+import Why from "./pages/Why";
+import SaintSalYou from "./pages/SaintSalYou";
+import Hacp from "./pages/Hacp";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import ForgotPassword from "./pages/ForgotPassword";
+import NotFound from "./pages/NotFound";
+import RouteScanner from "./routes/index";
+
+// SaintVision Homepage
+import SaintVisionHomepage from "./pages/SaintVisionHomepage";
+
+// Builder.io integration - DISABLED for homepage override fix
+// import BuilderPageHandler from "./pages/BuilderPageHandler";
+// import { initializeBuilderComprehensive } from "./lib/builder-init";
+
+// Builder.io is completely disabled to prevent homepage override
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+<<<<<<< HEAD
+      <BrowserRouter>
+                <Routes>
+                              {/* EMERGENCY FIX - Use WorkingHomepage to bypass Builder.io cache */}
+          <Route path="/" element={<WorkingHomepage />} />
+          <Route path="/home" element={<WorkingHomepage />} />
+          <Route path="/index" element={<Index />} />
+=======
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Routes>
+          {/* Core app routes - CRITICAL: Keep Index as exact root path */}
+          <Route path="/" element={<Index />} />
+>>>>>>> d00e2eb5ad145375cc805bf4fa27fea383d58b50
+          <Route path="/__routes" element={<RouteScanner />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/console" element={<Console />} />
+          <Route path="/console/:agentSlug" element={<Console />} />
+          <Route path="/create-agent" element={<CreateAgent />} />
+          <Route path="/ai-training" element={<AITraining />} />
+          <Route path="/partnertech" element={<PartnerTech />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/upgrade" element={<Upgrade />} />
+          <Route path="/chrome-install" element={<ChromeInstall />} />
+          <Route path="/crm" element={<CRM />} />
+          <Route path="/admin/clients" element={<AdminClients />} />
+          <Route path="/admin/logs" element={<AdminLogs />} />
+          <Route path="/admin/onboarding" element={<ClientOnboarding />} />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
+          <Route path="/setup" element={<Setup />} />
+          <Route path="/referral/invite" element={<ReferralInvite />} />
+          <Route path="/workspace/:slug" element={<Workspace />} />
+          <Route path="/workspace/notes" element={<StickyNotes />} />
+          <Route path="/workspace/image-gen" element={<ImageGenerator />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/research" element={<ResearchRedirect />} />
+          <Route path="/why" element={<Why />} />
+          <Route path="/saintsal-you" element={<SaintSalYou />} />
+          <Route path="/hacp" element={<Hacp />} />
+
+          {/* Legal Pages */}
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/gdpr" element={<Privacy />} />
+          <Route path="/security" element={<Privacy />} />
+          <Route path="/data-processing" element={<Privacy />} />
+
+          {/* SaintVision Homepage route */}
+          <Route path="/saintvision" element={<SaintVisionHomepage />} />
+
+<<<<<<< HEAD
+                    {/* Builder.io DISABLED - was overriding homepage */}
+          {/* <Route path="/builder/*" element={<BuilderPageHandler />} /> */}
+=======
+          {/* Builder.io dynamic pages for content management - SPECIFIC PATHS ONLY */}
+          <Route path="/builder/*" element={<BuilderPageHandler />} />
+          <Route path="/cms/*" element={<BuilderPageHandler />} />
+          <Route path="/page/*" element={<BuilderPageHandler />} />
+>>>>>>> d00e2eb5ad145375cc805bf4fa27fea383d58b50
+
+          {/* Catch-all for 404 - MUST BE LAST */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;

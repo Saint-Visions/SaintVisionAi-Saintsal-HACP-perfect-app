@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "env": {
+    "NEXT_PUBLIC_BUILDER_API_KEY": "065997bd13e4442e888a06852fcd61ba",
+    "NEXT_PUBLIC_SUPABASE_URL": "https://kweiqpogpqnywmhswvlf.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3ZWlxcG9ncHFueXdtaHN3dmxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNjUwOTYsImV4cCI6MjA2Njk0MTA5Nn0.axMzUqE-TRAMBzdPI_qvaagQKzgIs6wasYXav9cLs6k"
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/builder/:path*",
+      "destination": "/builder"
+    }
+  ]
+}
+
