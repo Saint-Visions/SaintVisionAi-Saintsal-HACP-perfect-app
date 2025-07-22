@@ -1,33 +1,45 @@
-// app/saintvision/page.tsx
+// Mark this file as a Client Component
+'use client';  // Add this line at the top
 
-"use client";
+import React, { useState, useEffect, useContext } from 'react';
+import { MyContext } from '@/context';  // Make sure this matches the correct context location
 
-import { useContext } from "react";
-import { AppContext } from "@/context"; // Replace with your actual context path
-import Link from "next/link";
+const SaintVisionPage: React.FC = () => {
+  const { state, setState } = useContext(MyContext);  // Accessing global context state
+  
+  const [data, setData] = useState<any>(null);  // Local state for dynamic data
 
-export default function SaintVisionPage() {
-  const context = useContext(AppContext);
-
-  // ✅ Handle case where context is unavailable during prerender
-  if (!context) {
-    if (typeof window === "undefined") {
-      console.warn("AppContext not available during build prerender.");
-      return null;
-    }
-    throw new Error("AppContext.Provider is missing");
-  }
-
-  const { basename } = context;
+  useEffect(() => {
+    fetch('/api/saintvision')
+      .then((response) => response.json())
+      .then((data) => setData(data))  // Set dynamic data to state
+      .catch((error) => console.error('Error fetching saintvision data:', error));
+  }, []);  // Fetch data only once on component mount
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">Welcome to SaintVision™</h1>
-      <p className="mb-2">Basename from context: {basename}</p>
-      <Link href="/" className="text-blue-500 underline">
-        Go Back Home
-      </Link>
+    <div className="saintvision-page">
+      <h1>Welcome to SaintVision™</h1>
+      
+      {/* Display dynamic data or loading */}
+      <div>
+        {data ? (
+          <div>
+            <h2>SaintVision Data:</h2>
+            <pre>{JSON.stringify(data, null, 2)}</pre> {/* Render fetched data */}
+          </div>
+        ) : (
+          <p>Loading data...</p>  {/* Loading state */}
+        )}
+      </div>
+
+      {/* Display context state (if needed) */}
+      <div>
+        <h2>Context Data:</h2>
+        <p>{state ? JSON.stringify(state) : 'No context data available'}</p>
+      </div>
     </div>
   );
-}
+};
+
+export default SaintVisionPage;
 

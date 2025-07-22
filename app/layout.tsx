@@ -1,19 +1,14 @@
-import '../styles/globals.css'; // ✅ Correct CSS path
-import { ReactNode } from 'react';
-import { AppProvider } from './context'; // ✅ Your context wrapper
+// app/layout.tsx
+import React from 'react';
+import { MyProvider } from '@/context'; // Make sure this is correctly imported
 
-export const metadata = {
-  title: "SaintVisionAI™ - Cookin' Knowledge",
-  description: "AI doesn't just answer. It adapts. It empowers. It becomes your enterprise companion.",
+const Layout: React.FC = ({ children }) => {
+  return (
+    <MyProvider>
+      <div>{children}</div>
+    </MyProvider>
+  );
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <AppProvider>{children}</AppProvider>
-      </body>
-    </html>
-  );
-}
+export default Layout;
 

@@ -1,16 +1,23 @@
-"use client";
-import { createContext, useContext, useState } from 'react';
+// app/context.tsx
+import React, { createContext, useState, ReactNode } from 'react';
 
-export const AppContext = createContext<any>({});
+// Define the context type
+interface MyContextType {
+  state: any;
+  setState: React.Dispatch<React.SetStateAction<any>>;
+}
 
-export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, setState] = useState({});
+// Create context with default values
+export const MyContext = createContext<MyContextType | undefined>(undefined);
+
+// Context provider component
+export const MyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [state, setState] = useState<any>(null);
+
   return (
-    <AppContext.Provider value={{ state, setState }}>
+    <MyContext.Provider value={{ state, setState }}>
       {children}
-    </AppContext.Provider>
+    </MyContext.Provider>
   );
 };
-
-export const useAppContext = () => useContext(AppContext);
 
